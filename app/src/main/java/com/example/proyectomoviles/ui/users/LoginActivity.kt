@@ -34,8 +34,8 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         btnAutenticar = findViewById(R.id.btnAutenticar)
-        txtEmail = findViewById(R.id.txtEmail)
-        txtContra = findViewById(R.id.txtContra)
+        txtEmail = findViewById(R.id.txtName)
+        txtContra = findViewById(R.id.txtSchoolGrade)
         txtRegister = findViewById(R.id.txtRegister)
 
         txtRegister.setOnClickListener {
