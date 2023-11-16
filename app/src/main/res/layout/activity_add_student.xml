@@ -7,7 +7,7 @@
     android:layout_margin="15dp"
 
     android:orientation="vertical"
-    tools:context=".ui.users.LoginActivity">
+    tools:context=".addStudent">
 
     <TextView
         android:id="@+id/textView"
@@ -18,7 +18,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginBottom="45dp"
         android:fontFamily="sans-serif-black"
-        android:text="Login"
+        android:text="Student"
         android:textAlignment="center"
         android:textSize="24sp" />
 
@@ -31,8 +31,8 @@
         android:autofillHints=""
         android:ems="10"
         android:gravity="center"
-        android:hint="@string/prompt_email"
-        android:inputType="textEmailAddress"
+        android:hint="Full Name"
+        android:inputType="text|textPersonName"
         android:minHeight="48dp"
         android:textColorHint="#757575" />
 
@@ -42,43 +42,50 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="45dp"
         android:autofillHints=""
         android:ems="10"
         android:gravity="center"
-        android:hint="@string/prompt_password"
-        android:inputType="textPassword"
+        android:hint="School Grade"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:textColorHint="#757575" />
+
+
+    <EditText
+        android:id="@+id/txtAboutMe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:gravity="center"
+        android:hint="About Me"
+        android:inputType="text"
         android:minHeight="48dp"
         android:textColorHint="#757575" />
 
     <Button
-        android:id="@+id/btnAutenticar"
+        android:id="@+id/btnProfilePicture"
         style="@style/Widget.AppCompat.Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="35dp"
-        android:text="@string/prompt_login"
+        android:layout_marginBottom="45dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="Profile Picture"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
 
     <Button
         android:id="@+id/btnAddStudent"
         style="@style/Widget.AppCompat.Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="35dp"
-        android:text="Login with Google"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="Add Student"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-    <TextView
-        android:id="@+id/txtRegister"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="Sign Up Here"
-        android:textAlignment="center"
-        android:textSize="18sp" />
+
 
 </LinearLayout>
