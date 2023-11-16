@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
             if (uid == "null"){
                 auth.signInWithEmailAndPassword(email.toString(), contra.toString()).addOnCompleteListener {
                     if (it.isSuccessful) {
-                        Toast.makeText(this,"Autenticación correcta", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this,"Successful Authentication", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -68,6 +68,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun obtenerDatos() {
-        Toast.makeText(this,"Esperando hacer algo importante", Toast.LENGTH_LONG).show()
+        Toast.makeText(this,"Hoping to do something important", Toast.LENGTH_LONG).show()
     }
 }
