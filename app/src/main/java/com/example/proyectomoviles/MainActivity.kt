@@ -11,6 +11,7 @@ import com.example.proyectomoviles.databinding.ActivityMainBinding
 
 import android.content.Context
 import android.content.Intent
+import android.widget.Button
 import android.widget.Toast
 import com.example.proyectomoviles.ui.users.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -26,6 +27,9 @@ class MainActivity : AppCompatActivity() {
     var auth = FirebaseAuth.getInstance()
     var email: String? = null
     var contra: String? = null
+
+    private lateinit var btnLogOut: Button
+    private lateinit var btnAboutUs: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -65,9 +69,36 @@ class MainActivity : AppCompatActivity() {
             obtenerDatos()
         }
 
+        btnLogOut = findViewById(R.id.btnLogOut)
+        btnAboutUs = findViewById(R.id.btnAboutUS)
+
+        btnLogOut.setOnClickListener {
+            LogOut()
+        }
+
+        btnAboutUs.setOnClickListener {
+            AboutUs()
+        }
+
     }
 
     private fun obtenerDatos() {
         Toast.makeText(this,"Hoping to do something important", Toast.LENGTH_LONG).show()
     }
+
+    private fun LogOut() {
+        auth.signOut()
+        Toast.makeText(this, "Cerrar sesión exitosa", Toast.LENGTH_SHORT).show()
+
+        // Redirige a la pantalla de inicio de sesión
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivityForResult(intent, valorIntentLogin)
+        finish() // Cierra la actividad actual para evitar que el usuario regrese con el botón "Atrás"
+    }
+
+    private fun AboutUs(){
+        val intent = Intent(this, about::class.java)
+        startActivity(intent)
+    }
+
 }
