@@ -93,7 +93,6 @@ class MainActivity : AppCompatActivity() {
         // Redirige a la pantalla de inicio de sesión
         val intent = Intent(this, LoginActivity::class.java)
         startActivityForResult(intent, valorIntentLogin)
-        finish() // Cierra la actividad actual para evitar que el usuario regrese con el botón "Atrás"
     }
 
     private fun AboutUs(){
