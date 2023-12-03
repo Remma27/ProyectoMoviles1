@@ -11,9 +11,17 @@ import com.example.proyectomoviles.databinding.ActivityMainBinding
 
 import android.content.Context
 import android.content.Intent
+import android.widget.TextView
 import android.widget.Toast
 import com.example.proyectomoviles.ui.users.LoginActivity
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth
+import android.widget.Button
+import com.example.proyectomoviles.ui.users.SignupActivity
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 const val valorIntentLogin = 1
 
@@ -21,6 +29,8 @@ const val valorIntentLogin = 1
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var mGoogleSignInClient: GoogleSignInClient
+    private lateinit var mAuth: FirebaseAuth
 
 
     var auth = FirebaseAuth.getInstance()
@@ -65,9 +75,52 @@ class MainActivity : AppCompatActivity() {
             obtenerDatos()
         }
 
+        mAuth = FirebaseAuth.getInstance()
+
+
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
+
+
+
+        val textView = findViewById<TextView>(R.id.name)
+
+        val auth = Firebase.auth
+        val user = auth.currentUser
+
+        if (user != null) {
+            val userName = user.displayName
+            textView.text = "Welcome, " + userName
+        } else {
+            // Handle the case where the user is not signed in
+        }
+
+
+
+        // Inside onCreate() method
+        val sign_out_button = findViewById<Button>(R.id.logout_button)
+        sign_out_button.setOnClickListener {
+            signOutAndStartSignInActivity()
+        }
+
     }
 
     private fun obtenerDatos() {
         Toast.makeText(this,"Hoping to do something important", Toast.LENGTH_LONG).show()
+    }
+
+    private fun signOutAndStartSignInActivity() {
+        mAuth.signOut()
+
+        mGoogleSignInClient.signOut().addOnCompleteListener(this) {
+            // Optional: Update UI or show a message to the user
+            val intent = Intent(this@MainActivity, SignupActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 }

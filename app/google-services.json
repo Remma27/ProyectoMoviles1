@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "169179709322-ufvk19bgcurb93447me2ht4irkaihqc5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.proyectomoviles",
+            "certificate_hash": "fd31ea66e0411488f1c064c48b74e2b4efc6df58"
+          }
+        },
+        {
           "client_id": "169179709322-c2odu75pnadk0bgr71i77pkoh4l4rtd6.apps.googleusercontent.com",
           "client_type": 3
         }
