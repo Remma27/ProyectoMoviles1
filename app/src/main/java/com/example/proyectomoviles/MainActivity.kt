@@ -8,7 +8,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.proyectomoviles.databinding.ActivityMainBinding
-
 import android.content.Context
 import android.content.Intent
 import android.widget.TextView
@@ -36,6 +35,9 @@ class MainActivity : AppCompatActivity() {
     var auth = FirebaseAuth.getInstance()
     var email: String? = null
     var contra: String? = null
+
+    private lateinit var btnLogOut: Button
+    private lateinit var btnAboutUs: Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -75,6 +77,7 @@ class MainActivity : AppCompatActivity() {
             obtenerDatos()
         }
 
+
         mAuth = FirebaseAuth.getInstance()
 
 
@@ -113,6 +116,7 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this,"Hoping to do something important", Toast.LENGTH_LONG).show()
     }
 
+
     private fun signOutAndStartSignInActivity() {
         mAuth.signOut()
 
@@ -123,4 +127,5 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
     }
+
 }

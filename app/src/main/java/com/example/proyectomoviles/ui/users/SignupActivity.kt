@@ -38,6 +38,7 @@ class SignupActivity : AppCompatActivity() {
         private const val RC_SIGN_IN = 9001
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)

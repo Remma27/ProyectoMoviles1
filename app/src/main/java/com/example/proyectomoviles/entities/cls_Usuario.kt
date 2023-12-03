@@ -1,4 +1,4 @@
-package com.example.a14_firebaseaccess.entities
+package com.example.proyectomoviles.entities
 
 class cls_Usuario {
     var token: String = ""
