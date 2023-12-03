@@ -96,4 +96,5 @@
         android:text="Sign Up with Google"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
+
 </LinearLayout>

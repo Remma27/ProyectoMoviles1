@@ -13,11 +13,15 @@ import android.widget.TextView
 
 import com.google.firebase.auth.FirebaseAuth
 import android.widget.Toast
+import com.example.proyectomoviles.MainActivity
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import com.google.firebase.firestore.FirebaseFirestore
 import java.util.Date
 
 const val valorIntentSignup = 1
-
+const val RC_SIGN_IN = 9001
 
 class LoginActivity : AppCompatActivity() {
 
@@ -27,6 +31,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var txtEmail: EditText
     private lateinit var txtContra: EditText
     private lateinit var txtRegister: TextView
+    private lateinit var btnLoginWithGoogle: Button
     var db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,9 +42,13 @@ class LoginActivity : AppCompatActivity() {
         txtEmail = findViewById(R.id.txtName)
         txtContra = findViewById(R.id.txtSchoolGrade)
         txtRegister = findViewById(R.id.txtRegister)
+        btnLoginWithGoogle = findViewById(R.id.btnAddStudent)
 
         txtRegister.setOnClickListener {
             goToSignup()
+        }
+        btnLoginWithGoogle.setOnClickListener {
+            signInWithGoogle()
         }
 
         btnAutenticar.setOnClickListener {
@@ -116,5 +125,57 @@ class LoginActivity : AppCompatActivity() {
                 finish()
             }
         }
+        if (requestCode == RC_SIGN_IN) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                val account = task.getResult(ApiException::class.java)
+                checkUserInFirebase(account.id!!)
+            } catch (e: ApiException) {
+                Toast.makeText(this, "Google sign in failed: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun signInWithGoogle() {
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+        val googleSignInClient = GoogleSignIn.getClient(this, gso)
+        val signInIntent = googleSignInClient.signInIntent
+        startActivityForResult(signInIntent, RC_SIGN_IN)
+    }
+
+    private fun checkUserInFirebase(userId: String) {
+        auth.fetchSignInMethodsForEmail("$userId@gmail.com")
+            .addOnCompleteListener { result ->
+                if (result.isSuccessful) {
+                    val signInMethods = result.result?.signInMethods
+                    if (signInMethods.isNullOrEmpty()) {
+                        // El usuario no está registrado, crea el usuario en Firebase
+                        createUserInFirebase(userId)
+                    } else {
+                        // El usuario ya está registrado, redirige al MainActivity
+                        redirectToMainActivity()
+                    }
+                } else {
+                    Toast.makeText(this, "Error checking user in Firebase", Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+
+    private fun createUserInFirebase(userId: String) {
+        // Implementa la lógica para crear el usuario en Firebase
+        // ...
+
+        // Después de crear el usuario, redirigimos al MainActivity
+        redirectToMainActivity()
+    }
+
+    private fun redirectToMainActivity() {
+        val loginIntent = Intent(this, MainActivity::class.java)
+        startActivity(loginIntent)
+        finish()
     }
 }
