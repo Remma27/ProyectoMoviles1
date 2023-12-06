@@ -17,5 +17,6 @@
     <string name="prompt_login">Login</string>
 
     <string name="default_web_client_id">169179709322-c2odu75pnadk0bgr71i77pkoh4l4rtd6.apps.googleusercontent.com</string>
+    <string name="area_of_interest" />
 
 </resources>
